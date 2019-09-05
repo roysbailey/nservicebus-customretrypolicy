@@ -13,7 +13,7 @@ In this example, we implement a custom retry policy.  When a handler exists with
 
 **Client.Core** sends an nServiceBus message to a proessor (Server.Core) for processing.  The message has two elements, an Id and a Value.  In this test, the Value is a random number between 1 and 100.
 
-** Server.Core ** precessed messages received from Client.Core.  When processing, the message.Value is inspected.  This value dictates how the message is treated.  There are three ranges...
+**Server.Core** precessed messages received from Client.Core.  When processing, the message.Value is inspected.  This value dictates how the message is treated.  There are three ranges...
 
 +  0-24  Message is treated as a transient failure.  The message will be retried using the default immediate and delayed retry counts
 + 25-75  Message is treated as success, and is processed accordingly.
