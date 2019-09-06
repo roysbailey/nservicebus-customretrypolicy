@@ -7,7 +7,9 @@ It is interesting to note the relationship between immediate and delayed retries
 
 This behaviour is perfect for transient errors, as it allows our code to be gracefully retried and in most cases the message gets through on retry, so there is no need for any other action.  However, for permenant failures (poison messages) this retry policy can be costly.  As a poisoned message which will have no change of success is tried over and over.  This can be a performance issue, and delay work completing.
 
-In this example, we implement a custom retry policy.  When a handler exists with an exception of type _PoisonMessageException_ then the message is immediately moved into a different error queue, and no further (wasteful) retries are attempted.
+In this example, we implement a custom retry policy.  When a handler exists with an exception of type _PoisonMessageException_ then the message is immediately moved into a different error queue, and no further (wasteful) retries are attempted.  
+
+Note. In this example, we want to have fine grained control as to which queue we write poisoned messages to.  By default, we can use the _AddUnrecoverableException_ method to inform nServiceBus not to retry specific messages. We go a step ahead here, and implement a custom policy, which allows us finer control (e.g. decide which queue to write certain failures to)
 
 ## The project
 
